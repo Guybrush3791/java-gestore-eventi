@@ -68,6 +68,17 @@ public class Evento {
 		return getHumanDate() + " - " + getTitolo();
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		
+		if (!(obj instanceof Evento)) return false;
+		
+		Evento e = (Evento) obj;
+		
+		return getTitolo().equals(e.getTitolo())
+			&& getData().equals(e.getData());
+	}
+	
 	protected String getHumanDate() {
 		
 		return getData().format(DateTimeFormatter.ofPattern("d-M-Y"));

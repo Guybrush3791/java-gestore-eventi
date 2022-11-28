@@ -1,10 +1,9 @@
 package org.generation.italy.eventi;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Main {
 
@@ -13,15 +12,74 @@ public class Main {
 //		es1();
 //		es2();
 		
-		Concerto c = new Concerto(
-			"java concert", LocalDate.now().plusDays(10), 10, 
-			LocalTime.now(), BigDecimal.valueOf(100d)
-		);
+//		es3();
 		
-		System.out.println("Date time: " + c.getHumanDateTime());
-		System.out.println("Prezzo: " + c.getHumanPrice());
+		ProgrammaEventiUnici pe = new ProgrammaEventiUnici("Java party series");
 		
-		System.out.println(c);
+		Evento e1 = new Evento("java-party", LocalDate.now().plusDays(10), 10);
+		Evento e2 = new Evento("java-party advanced 1", LocalDate.now().plusDays(15), 5);
+		Evento e3 = new Evento("java-party advanced 2", LocalDate.now().plusDays(15), 5);
+		Evento e4 = new Evento("java-party lead", LocalDate.now().plusDays(20), 3);
+		
+		pe.addEvento(e1);
+		pe.addEvento(e2);
+		pe.addEvento(e3);
+		pe.addEvento(e4);
+		
+		System.out.println(pe);
+		
+		Evento eMaxPosti = pe.getMaxPostiTotaliEvento();
+		System.out.println(eMaxPosti);
+		
+		System.out.println("-----------------");
+		
+		Evento eMinPosti = pe.getMinPostiTotaliEvento();
+		System.out.println(eMinPosti);
+		
+		System.out.println("-----------------");
+		
+		pe.printOrderedList();
+		
+		System.out.println("-----------------");
+		
+		Evento minDataEvento = pe.getFirstEvento();
+		System.out.println(minDataEvento);
+		
+		System.out.println("-----------------");
+		
+		pe.getLastEvent();
+	}
+	
+	private static void es3() {
+		
+		ProgrammaEventiUnici pe = new ProgrammaEventiUnici("Java party series");
+		
+		Evento e1 = new Evento("java-party", LocalDate.now().plusDays(10), 10);
+		Evento e2 = new Evento("java-party advanced 1", LocalDate.now().plusDays(15), 5);
+		Evento e3 = new Evento("java-party advanced 2", LocalDate.now().plusDays(15), 5);
+		Evento e4 = new Evento("java-party lead", LocalDate.now().plusDays(20), 3);
+		
+		pe.addEvento(e1);
+		pe.addEvento(e2);
+		pe.addEvento(e3);
+		pe.addEvento(e4);
+		
+		System.out.println(pe);
+		
+		Set<Evento> eventiTra15gg = pe.getEventiByDate(LocalDate.now().plusDays(15));
+		System.out.println(eventiTra15gg);
+		
+		int eventiCount = pe.getEventiCount();
+		System.out.println("Numero eventi: " + eventiCount);
+		
+		boolean res = pe.clearEventi();
+		res = pe.clearEventi();
+		System.out.println("Eliminazione eventi: " + (res ? "OK" : "KO"));
+		
+		eventiCount = pe.getEventiCount();
+		System.out.println("Numero eventi: " + eventiCount);
+		
+		System.out.println(pe);
 	}
 	
 	private static void es2() {
